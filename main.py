@@ -146,7 +146,7 @@ async def grafico_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     request = HTTPXRequest(connect_timeout=15.0, read_timeout=15.0)
-    app = ApplicationBuilder().token(TOKEN).request(request).build() #TOKEN funciona correctamente, si marca error es porque es un bug.
+    app = ApplicationBuilder().token(TOKEN).request(request).build() # pyright: ignore[reportArgumentType] #TOKEN funciona correctamente, si marca error es porque es un bug.
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
