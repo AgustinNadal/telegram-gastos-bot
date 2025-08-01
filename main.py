@@ -148,8 +148,9 @@ async def grafico_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- MAIN ---
 
-async def main():
+def main():
     keep_alive()
+
     request = HTTPXRequest(connect_timeout=15.0, read_timeout=15.0)
     app = ApplicationBuilder().token(TOKEN_CORRECTO).request(request).build() #TOKEN funciona correctamente, si marca error es porque es un bug.
 
@@ -162,4 +163,4 @@ async def main():
     app.run_polling()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
