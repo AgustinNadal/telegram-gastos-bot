@@ -2,6 +2,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 import sqlite3
+import asyncio
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
@@ -9,12 +10,14 @@ from telegram.request import HTTPXRequest
 from db import init_db, guardar_gasto
 from io import BytesIO
 from datetime import datetime
+from keep_alive import keep_alive
 
 
 
 # Cargar token del bot desde archivo .env
 load_dotenv()
 init_db()
+
 
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 if TOKEN is None:
@@ -145,7 +148,8 @@ async def grafico_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- MAIN ---
 
-def main():
+async def main():
+    keep_alive()
     request = HTTPXRequest(connect_timeout=15.0, read_timeout=15.0)
     app = ApplicationBuilder().token(TOKEN_CORRECTO).request(request).build() #TOKEN funciona correctamente, si marca error es porque es un bug.
 
@@ -158,4 +162,4 @@ def main():
     app.run_polling()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
