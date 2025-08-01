@@ -76,6 +76,7 @@ python main.py
 ├── main.py              # Código principal del bot
 ├── db.py                # Módulo para crear y guardar en la base de datos SQLite
 ├── .env                 # Archivo oculto con el token del bot
+├── keep_alivepy         # Intenta manetener el host siempre activo
 ├── requirements.txt     # Lista de dependencias
 └── README.md            # Este archivo
 ```
